@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zorvyn Finance Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar panel">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">Z</div>
+        <div>
+          <p class="brand-name">Zorvyn Finance</p>
+          <p class="brand-tag">Treasury Command Center</p>
+        </div>
+      </div>
+
+      <section class="control-panel">
+        <p class="section-label">Access Mode</p>
+        <label class="field-label" for="roleSwitcher">Role Switcher</label>
+        <select id="roleSwitcher" class="control-select">
+          <option value="admin">Admin</option>
+          <option value="viewer">Viewer</option>
+        </select>
+        <p class="helper-text">
+          Admins can add, edit, and delete transactions. Viewers get a read-only ledger view.
+        </p>
+      </section>
+
+      <nav class="sidebar-nav" aria-label="Dashboard navigation">
+        <a class="nav-item nav-item-active" href="#overview">Overview</a>
+        <a class="nav-item" href="#analytics">Analytics</a>
+        <a class="nav-item" href="#ledger">Ledger</a>
+      </nav>
+
+      <section class="sidebar-note">
+        <p class="sidebar-note-title">Live operational view</p>
+        <p class="helper-text">
+          Real-time search, role-based controls, and Chart.js-powered insights keep the layout
+          assessment-ready.
+        </p>
+      </section>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="hero panel">
+        <div class="hero-copy">
+          <p class="section-label">Finance intelligence</p>
+          <h1 class="hero-title">Finance Dashboard</h1>
+          <p class="hero-description">
+            Monitor cash position, monthly flows, and category trends with a clean plain-JS interface.
+          </p>
+        </div>
+
+        <div class="hero-actions">
+          <div class="summary-chip">
+            <span class="summary-chip-label">Transaction Ledger</span>
+            <span id="transactionCount" class="summary-chip-value">0 records</span>
+          </div>
+          <div class="hero-actions">
+            <div class="summary-chip">
+              <span class="summary-chip-label">Transaction Ledger</span>
+              <span id="transactionCount" class="summary-chip-value">0 records</span>
+            </div>
+
+            <button id="exportCsvBtn" class="secondary-button" type="button" style="margin-right: 8px;">
+              Export CSV
+            </button>
+            <button id="addTransactionBtn" class="primary-button" type="button">
+              Add Transaction
+            </button>
+          </div>
+      </header>
+
+      <section id="kpiGrid" class="kpi-grid" aria-label="Key performance indicators"></section>
+
+      <section id="analytics" class="chart-grid">
+        <article class="panel chart-card">
+          <div class="chart-head">
+            <div>
+              <p class="section-label">Balance Trend</p>
+              <h2 class="chart-title">Line Chart</h2>
+            </div>
+            <span class="chart-pill chart-pill-cyan">Live</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="balanceTrendChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel chart-card">
+          <div class="chart-head">
+            <div>
+              <p class="section-label">Spending by Category</p>
+              <h2 class="chart-title">Pie Chart</h2>
+            </div>
+            <span class="chart-pill chart-pill-emerald">Expenses</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="spendingPieChart"></canvas>
+          </div>
+        </article>
+      </section>
+
+      <section class="bottom-grid">
+        <article id="insightsPanel" class="panel insights-card"></article>
+
+        <article id="ledger" class="panel table-card">
+          <div class="table-head" style="flex-wrap: wrap;">
+            <div>
+              <p class="section-label">Transaction Table</p>
+              <h2 class="table-title">Ledger Entries</h2>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <select id="sortSelect" class="control-select" style="width: auto; padding: 12px 16px;">
+                <option value="desc">Newest First</option>
+                <option value="asc">Oldest First</option>
+              </select>
+
+              <label class="search-field" for="searchInput">
+                <span class="search-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="M20 20l-3.5-3.5"></path>
+                  </svg>
+                </span>
+                <input id="searchInput" class="search-input" type="text" placeholder="Search by category"
+                  autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="table-wrap">
+              <table class="transactions-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionTableBody"></tbody>
+              </table>
+            </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
