@@ -1,4 +1,4 @@
-# Zorvyn Finance Dashboard
+# Zorvy Finance Dashboard
 
 **Developed by:** Md Irfan Safi  
 **Contact:** itisirfan9091@gmail.com  
